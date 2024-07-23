@@ -1,31 +1,19 @@
-import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
-import { Link } from 'expo-router';
+import { StyleSheet, Text, View } from 'react-native'
+import React from 'react'
+import {Link} from 'expo-router';
 
-const Profile = () => {
+import { StatusBar } from 'expo-status-bar';
+
+const index = () => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Aora!!</Text>
-      <Link href="/profile" style={styles.link}>Go  to Profile</Link>
+    <View className="flex-1 items-center justify-center bg-white ">
+       <StatusBar style="auto" />
+      <Text className="text-3xl font-pblack">Aora!!</Text>
+      <Link href="/home" style={{color:'blue'}}>Go to Home</Link>
     </View>
-  );
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'white',
-  },
-  text: {
-    fontSize: 20,
-    marginBottom: 20,
-  },
-  link: {
-    color: 'blue',
-    fontSize: 18,
-  },
-});
+export default index
 
-export default Profile;
+const styles = StyleSheet.create({})
