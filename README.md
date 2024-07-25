@@ -48,3 +48,32 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+## Catatan
+
+```javascript
+  return (
+    <Stack>
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+    </Stack>
+  );
+};
+```
+
+- Stack
+  Komponen Stack (lebih sering disebut createStackNavigator) adalah navigator yang memungkinkan Anda untuk mendefinisikan struktur navigasi berbasis tumpukan (stack). Ini berarti ia mengelola tumpukan layar di mana Anda dapat menambahkan layar baru ke tumpukan dan menghapus layar dari tumpukan.
+
+- Stack.Screen
+  Komponen Stack.Screen mendefinisikan layar dalam stack navigator. Setiap Stack.Screen mewakili rute yang dapat Anda navigasikan. Anda dapat menentukan nama layar dan berbagai opsi, seperti apakah header (judul) harus ditampilkan atau tidak.
+
+- vh membantu memusaaatkan tampilan ke tengah
+
+- resizeMode adalah properti dari komponen Image di React Native yang menentukan bagaimana gambar akan diubah ukurannya untuk menyesuaikan dengan ukuran yang ditentuka
+
+- Kelas text-3xl mengatur ukuran teks menjadi sangat besar, membuat teks lebih menonjol.
+
+- text-sm mengatur ukuran teks menjadi kecil, cocok untuk teks deskriptif atau tambahan yang tidak perlu terlalu menonjol.
+
+- code customButoon berada di components
+
+- Digunakan untuk menerangkan seperti baterai,wifi,dll yaang berada diatas
