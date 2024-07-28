@@ -1,42 +1,68 @@
-import { StyleSheet, Text, View, ScrollView, Image, } from "react-native";
+import { StyleSheet, Text, View, ScrollView, Image, Alert } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { images } from "../../constants";
 import FormField from "@/components/FormField";
 import CustomButton from "@/components/CustomButton";
-import {Link} from "expo-router"
+import { Link, useRouter } from "expo-router";
+import { createUsers } from "../../lib/appwrite";
 
-const signUp = () => {
+const SignUp = () => {
   const [form, setForm] = useState({
-    username:"",
+    username: "",
     email: "",
     password: "",
   });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
+
+  const submit = async () => {
+    if (!form.username || !form.email || !form.password) {
+      Alert.alert("Error", "Please Fill in All the Fields");
+      return;
+    }
+    setIsSubmitting(true);
+
+    try {
+      const result = await createUsers(form.email, form.password, form.username);
+      // set it to global state if necessary
+
+      router.replace('/home');
+    } catch (error) {
+      if (error instanceof Error) {
+        Alert.alert("Error", error.message);
+      } else {
+        Alert.alert("Error", "An unknown error occurred.");
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView>
         <View className="w-full justify-center min-h-[70vh] px-4 my-6">
-          <Image source={images.logo} resizeMode="contain" className="w-[115px] h-[35px] "></Image>
-          <Text className="text-white text-2xl  text-semibold mt-10 font-psemibold">Log in To Aora</Text>
+          <Image source={images.logo} resizeMode="contain" className="w-[115px] h-[35px]" />
+          <Text className="text-white text-2xl mt-10 font-psemibold">Sign Up To Aora</Text>
 
           <FormField
             title="Username"
             value={form.username}
-            hadnleChangeText={(event) =>
+            handleChangeText={(event) =>
               setForm({
                 ...form,
                 username: event,
               })
             }
             otherStyles="mt-7"
-            keyboardType="username-address"
           />
 
           <FormField
             title="Email"
             value={form.email}
-            hadnleChangeText={(event) =>
+            handleChangeText={(event) =>
               setForm({
                 ...form,
                 email: event,
@@ -49,28 +75,22 @@ const signUp = () => {
           <FormField
             title="Password"
             value={form.password}
-            hadnleChangeText={(event) =>
+            handleChangeText={(event) =>
               setForm({
                 ...form,
                 password: event,
               })
             }
             otherStyles="mt-7"
-            keyboardType="password-address"
+            secureTextEntry
           />
 
-          <CustomButton
-          title="Sig In"
-          // handlePress={submit}
-          containerStyles="mt-7"
-          // isLoading={isSubmitting}
-          >
-
-          </CustomButton>
+          <CustomButton title="Sign Up" handlePress={submit} containerStyles="mt-7" isLoading={isSubmitting} />
 
           <View className="justify-center items-center pt-5 flex-row gap-2">
-            <Text className="text-white font-pregular">have an account already?</Text>
-            <Link href={"/sign-in"} className="text-lg text-secondary-100 font-psemibold">Sign in
+            <Text className="text-white font-pregular">Already have an account?</Text>
+            <Link href={"/sign-in"} className="text-lg text-secondary-100 font-psemibold">
+              Sign In
             </Link>
           </View>
         </View>
@@ -79,6 +99,6 @@ const signUp = () => {
   );
 };
 
-export default signUp;
+export default SignUp;
 
 const styles = StyleSheet.create({});

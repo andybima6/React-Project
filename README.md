@@ -77,3 +77,9 @@ Join our community of developers creating universal apps.
 - code customButoon berada di components
 
 - Digunakan untuk menerangkan seperti baterai,wifi,dll yaang berada diatas
+
+# Downloaad SDK appwrite
+```terminal
+npx expo install react-native-appwrite react-native-url-polyfill
+```
+
