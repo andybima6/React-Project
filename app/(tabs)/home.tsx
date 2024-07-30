@@ -6,11 +6,12 @@ import SearchInput from "@/components/SearchInput";
 import Trending from "@/components/Trending";
 import EmptyState from "@/components/EmptyState";
 import { getAllPosts } from "@/lib/appwrite";
-import  useAppwrite  from "../../lib/useAppwrite";
+import useAppwrite from "../../lib/useAppwrite";
 import VideoCards from "@/components/VideoCards";
 
 const Home = () => {
-const {data : posts,refetch} = useAppwrite(getAllPosts);
+  
+  const { data: posts, refetch } = useAppwrite(getAllPosts);
 
   const [refreshing, setRefreshing] = useState(false);
 
@@ -21,16 +22,25 @@ const {data : posts,refetch} = useAppwrite(getAllPosts);
     setRefreshing(false);
   };
 
+
   return (
-    <SafeAreaView className="bg-primary h-full">
+    <SafeAreaView className="bg-primary">
       <FlatList
-        data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
-        // data={[]}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => 
-        <VideoCards 
-        video = {item}
-        />}
+        data={posts}
+        keyExtractor={(item) => item.$id}
+        renderItem={({ item }) => (
+          <VideoCards
+            videos={{
+              tittle: item.tittle,
+              thumbnail: item.thumbnail,
+              video: item.video,
+              creator: {
+                username: item.creator.username,
+                avatar: item.creator.avatar
+              }
+            }} 
+          />
+        )}
         ListHeaderComponent={() => (
           <View className="my-6 px-4">
             <View className="justify-between items-start flex-row mb-6">
