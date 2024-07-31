@@ -5,14 +5,14 @@ import { images } from "../../constants";
 import SearchInput from "@/components/SearchInput";
 import Trending from "@/components/Trending";
 import EmptyState from "@/components/EmptyState";
-import { getAllPosts } from "@/lib/appwrite";
+import { getAllPosts, getLatestPosts } from "@/lib/appwrite";
 import useAppwrite from "../../lib/useAppwrite";
 import VideoCards from "@/components/VideoCards";
+import { ResizeMode, Video } from "expo-av";
 
 const Home = () => {
-  
   const { data: posts, refetch } = useAppwrite(getAllPosts);
-
+  const { data: latestPosts } = useAppwrite(getLatestPosts);
   const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = async () => {
@@ -22,9 +22,8 @@ const Home = () => {
     setRefreshing(false);
   };
 
-
   return (
-    <SafeAreaView className="bg-primary">
+    <SafeAreaView className="bg-primary h-full">
       <FlatList
         data={posts}
         keyExtractor={(item) => item.$id}
@@ -32,13 +31,10 @@ const Home = () => {
           <VideoCards
             videos={{
               tittle: item.tittle,
-              thumbnail: item.thumbnail,
+              thumbnail : item.thumbnail,
               video: item.video,
-              creator: {
-                username: item.creator.username,
-                avatar: item.creator.avatar
-              }
-            }} 
+              creator: { username: item.creator.username, avatar: item.creator.avatar},
+            }}
           />
         )}
         ListHeaderComponent={() => (
@@ -57,7 +53,7 @@ const Home = () => {
             <View className="w-full flex-1 pt-5 pb-8">
               <Text className="text-gray-100 text-lg font-pregular mb-3">latest Videos</Text>
 
-              <Trending posts={[{ id: 1 }, { id: 2 }, { id: 3 }] ?? []} />
+              <Trending posts={latestPosts ?? []} />
             </View>
           </View>
         )}

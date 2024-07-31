@@ -83,3 +83,8 @@ Join our community of developers creating universal apps.
 npx expo install react-native-appwrite react-native-url-polyfill
 ```
 
+## Installasi
+```javascript
+npm install react-native-animatable expo-av
+```
+installasi animasi
