@@ -9,13 +9,13 @@ import { getCurrentUser, signIn } from "@/lib/appwrite";
 import { useGlobalContext } from "@/context/GlobalProvider";
 
 const SignIn = () => {
+  const {setUser,setIsLoggedIn} = useGlobalContext();
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { setUser, setIsLoggedIn } = useGlobalContext();
   const router = useRouter();
 
   const submit = async () => {
