@@ -93,3 +93,8 @@ installasi animasi
 npm install expo-document-picker
 ```
 installasi expo-document-picker
+
+```javascript
+npx expo install expo-image-picker
+```
+installasi expo-image-picker
