@@ -88,3 +88,8 @@ npx expo install react-native-appwrite react-native-url-polyfill
 npm install react-native-animatable expo-av
 ```
 installasi animasi
+
+```javascript
+npm install expo-document-picker
+```
+installasi expo-document-picker
